@@ -23,27 +23,6 @@ const REGISTER =  (credentials, setLoading, navigate) => {
 
 };
 
-
-const LOGIN = (credentials, navigate) => {
-    console.log("🚀 ~ LOGIN ~ credentials:", credentials)
-    return async (dispatch) => {
-        try {
-            const response = await POST('users/login', credentials);
-            // Cookies.set('token', response?.data?.token)
-            localStorage.setItem("token", response.data.token);
-            console.log("🚀 ~ return ~ response:", response)
-            toast.success("Login Successfull...");
-            navigate('/');
-            dispatch({
-                type: ActionTypes.LOGIN,
-                payload: response?.data
-            })
-        } catch (error) {
-            toast.error("Login Error!")
-            console.log(error);
-        }
-    }
-}
 const ADMIN_LOGIN = (credentials, navigate) => {
     return async (dispatch) => {
         try {
@@ -80,4 +59,4 @@ const LOGOUT = (navigate) => {
    }
 }
 
-export {REGISTER, LOGIN, ADMIN_LOGIN, LOGOUT}
+export {REGISTER, ADMIN_LOGIN, LOGOUT}

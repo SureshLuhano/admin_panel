@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,7 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import User from "../../assets/images/profile.png"
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import User from "../../assets/images/profile.png";
 
 function createData(name, calories, fat, carbs, protein, email) {
   return { name, calories, fat, carbs, protein, email };
@@ -33,8 +36,51 @@ const rows = [
 ];
 
 export default function TableComponent() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  
+  const menuHandleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <TableContainer component={Paper} style={{marginTop: "50px", height: "75vh", marginLeft: "50px", width: "auto", padding: "0px 30px"}}>
+      <div className='headerTop'>
+      <h1> Registered Users </h1>
+      <button
+        className='addUserBtn'
+      >
+        Add User
+      </button>
+      <div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={menuHandleClick}
+        className='menuBtn'
+      >
+        All
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>All</MenuItem>
+        <MenuItem onClick={handleClose}>Parents</MenuItem>
+        <MenuItem onClick={handleClose}>Child</MenuItem>
+      </Menu>
+    </div>
+      <input type="text" placeholder='Search Users' />
+      </div>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>

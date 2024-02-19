@@ -13,6 +13,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { RiLineChartLine } from "react-icons/ri";
 import { MdOutlineFeedback } from "react-icons/md";
 import Header from "../header";
+import toast from "react-toastify";
 
 
 function SideBar({ children }) {
@@ -24,6 +25,11 @@ function SideBar({ children }) {
   const navigate = useNavigate();
   const storageToken = localStorage.getItem("token");
 
+  const logOut = () => {
+toast.success('logout successfull');
+navigate("/")
+  }
+
   const childrenWithProps = React.Children.map(children, (child) => {
     // Checking isValidElement is the safe way and avoids a typescript
     // error too.
@@ -34,32 +40,6 @@ function SideBar({ children }) {
   });
   return (
     <>
-         {/* Popup start*/}
-         {/* <Popup open={popupOpenLogin} setOpen={setPopupOpenLogin}>
-        <div className="model-wrapper">
-          <img
-            src={Images.Pictures.userIcon}
-            className="model-wrapper_image"
-            alt="user-icon"
-          />
-          <p className="model-wrapper_text">Are you sure to switch your Account!</p>
-         
-          <Link
-            to="/login"
-            onClick={(e) => {
-              setPopupOpen(false);
-              // logoutAndSwitch(e);
-            }}
-            className="btn btn-solid btn-solid-primary-rounded model-wrapper_button "
-          >
-           Switch
-          </Link>
-        </div>
-      </Popup> */}
-      {/* Popup End */}
-      {/* <div style={{backgroundColor: "#fff", width: "100%"}}>
-      <h2 style={{color: "#000"}}> Alex </h2>
-      </div> */}
 <Header />
       <div className="trader-board-wrapper">
       <div id="trader-board-container">
@@ -141,10 +121,7 @@ function SideBar({ children }) {
             <h4 className="fs-4 text-bold" style={{color: "#000", fontWeight: 800}}>
               <Link
                 to={"/"}
-                // onClick={(e) => {
-                //   e.preventDefault();
-                //   logoutAndSwitch(e);
-                // }}
+              onClick={logOut}
                 className="flex"
               >
                 <FaSignOutAlt />
