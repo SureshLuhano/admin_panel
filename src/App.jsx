@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import {store, persistor} from "./redux/store";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 registerCharts();
 
